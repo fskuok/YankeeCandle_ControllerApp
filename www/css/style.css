@@ -49,7 +49,8 @@ header {
   width: 100%;
   z-index: 1;
   margin-top: 64px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.7); }
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.7);
+  border-radius: 1px; }
   #device-select #device-or-cluster div.radio-group {
     height: 40px;
     flex: 1;
@@ -98,7 +99,8 @@ header {
   height: 400px;
   width: 350px;
   margin: 20px auto;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.7); }
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.7);
+  border-radius: 1px; }
   #control-panel > * {
     position: relative; }
   #control-panel h2 {

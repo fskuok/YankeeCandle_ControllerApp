@@ -80,6 +80,7 @@ header{
     z-index: 1;
     margin-top: $header-height;
     box-shadow: $universal-shadow;
+    border-radius: 1px;
 
     #device-or-cluster{
         div.radio-group{
@@ -156,6 +157,7 @@ header{
     width: 350px;
     margin: 20px auto;
     box-shadow: $universal-shadow;
+    border-radius: 1px;
 
     &>*{
         position: relative;

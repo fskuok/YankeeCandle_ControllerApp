@@ -73,7 +73,7 @@ var dummyDeviceData = {
 
     "clusters": {
         "c001":{
-            "name": "bedroom",
+            "name": "living room",
             "color": "#a5acd9"
         },
         "c002":{
@@ -143,16 +143,31 @@ angular
                 $scope.choseDevice = 'd001';
                 $scope.choseCluster = 'c001';
 
-                $scope.$watchGroup(['choseDevice','choseSystem','choseCluster'], function(newValue, oldValue){
-                    console.log($scope.choseDevice, $scope.choseCluster);
+                $scope.$watchGroup(['choseDevice','choseSystem','choseCluster'], function(){
                     $scope.choseDeviceData = $scope
                         .deviceData[$scope.choseSystem][$scope.choseSystem === 'devices' ?
                         $scope.choseDevice : $scope.choseCluster];
                 });
 
-                $scope.$watch('choseDevice', function(newV,oldV){
-                    console.log(newV,oldV);
-                })
+                $scope.onSwipeLeft = function(){ onSwipe('left');};
+                $scope.onSwipeRight = function(){ onSwipe('right');};
+                function onSwipe(direction){
+                    function shiftId(id, plus){
+                        return id.slice(0, id.length-1) + (+id.slice(id.length-1) + (plus ? 1 : -1))
+                    }
+
+                    if($scope.choseSystem === 'devices'){
+                        if($scope.deviceData.devices[shiftId($scope.choseDevice, direction === 'left')])
+                            $scope.choseDevice = shiftId($scope.choseDevice, direction === 'left')
+                    }else if($scope.choseSystem === 'clusters'){
+                        if($scope.deviceData.clusters[shiftId($scope.choseCluster, direction === 'left')])
+                            $scope.choseCluster = shiftId($scope.choseCluster, direction === 'left')
+
+                    }
+                }
+
+
+
 
             }
         ]
