@@ -15,7 +15,7 @@ var dummyDeviceData = {
                     "remain": 40
                 },
                 "scent03":{
-                    "name": "orange",
+                    "name": "lavender",
                     "remain": 50
                 }
             },
@@ -83,6 +83,7 @@ var dummyDeviceData = {
     }
 };
 
+
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
@@ -134,28 +135,23 @@ angular
     .controller( 'controlController',
         [ '$scope', '$ionicPlatform', '$cordovaDialogs',
             function( $scope, $ionicPlatform, $cordovaDialogs ){
-                $ionicPlatform.ready(function() {
+                var previousScent;
 
-                });
 
                 $scope.deviceData = dummyDeviceData;
+
+                // choosing status
                 $scope.choseSystem = 'devices';
                 $scope.choseDevice = 'd001';
                 $scope.choseCluster = 'c001';
 
-                $scope.$watchGroup(['choseDevice','choseSystem','choseCluster'], function(){
-                    $scope.choseDeviceData = $scope
-                        .deviceData[$scope.choseSystem][$scope.choseSystem === 'devices' ?
-                        $scope.choseDevice : $scope.choseCluster];
-                });
-
+                // change chose device or cluster by swiping
                 $scope.onSwipeLeft = function(){ onSwipe('left');};
                 $scope.onSwipeRight = function(){ onSwipe('right');};
                 function onSwipe(direction){
                     function shiftId(id, plus){
                         return id.slice(0, id.length-1) + (+id.slice(id.length-1) + (plus ? 1 : -1))
                     }
-
                     if($scope.choseSystem === 'devices'){
                         if($scope.deviceData.devices[shiftId($scope.choseDevice, direction === 'left')])
                             $scope.choseDevice = shiftId($scope.choseDevice, direction === 'left')
@@ -166,8 +162,29 @@ angular
                     }
                 }
 
+                // access chose device or cluster data on every change
+                $scope.$watchGroup(['choseDevice','choseSystem','choseCluster'], function(){
+                    $scope.choseDeviceData = $scope
+                        .deviceData[$scope.choseSystem][$scope.choseSystem === 'devices' ?
+                        $scope.choseDevice : $scope.choseCluster];
+
+                    previousScent = $scope.choseDeviceData.status.scent
+                });
 
 
+                $scope.scentOnTap = function(scentId){
+                    // if already have a scent on,
+                    // and tap again on this scent,
+                    // turn of the scent
+                    if(previousScent && previousScent === scentId){
+                        $scope.choseDeviceData.status.scent = scentId = null;
+                    }
+                    previousScent = scentId;
+                };
+
+                $ionicPlatform.ready(function() {
+
+                });
 
             }
         ]

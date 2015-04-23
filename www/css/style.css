@@ -15,24 +15,35 @@ input[type=radio] {
   display: none; }
 
 * {
-  font-family: "Verdana", sans-serif; }
+  font-family: "Verdana", sans-serif;
+  margin: 0;
+  padding: 0; }
 
 html, body {
   font-size: 10px; }
+
+#master-bg {
+  z-index: -999;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #f0f0f0; }
 
 header {
   position: fixed;
   z-index: 999;
   width: 100%;
-  height: 64px;
+  height: 72px;
   background: white;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.7); }
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5); }
   header #yankee-candle-logo {
-    width: 70px;
+    width: 72px;
     position: absolute;
     left: 50%;
-    margin-left: -35px;
-    bottom: 8px; }
+    margin-left: -36px;
+    bottom: 12px; }
 
 #device-or-cluster, #which-device, #control-panel {
   display: flex;
@@ -48,9 +59,10 @@ header {
 #device-select {
   width: 100%;
   z-index: 1;
-  margin-top: 64px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.7);
-  border-radius: 1px; }
+  margin-top: 72px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 1px;
+  background-color: #ffffff; }
   #device-select #device-or-cluster div.radio-group {
     height: 40px;
     flex: 1;
@@ -94,13 +106,21 @@ header {
       left: 50%;
       margin-top: 14px;
       margin-left: -16px; }
+      #device-select #which-device div.radio-group div.device-thumb div.on-thumb {
+        height: 22px;
+        width: 22px;
+        border: 3px solid white;
+        border-radius: 11px;
+        margin: 5px; }
 
 #control-panel {
   height: 400px;
   width: 350px;
   margin: 20px auto;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.7);
-  border-radius: 1px; }
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 1px;
+  border-bottom: 5px solid grey;
+  background-color: white; }
   #control-panel > * {
     position: relative; }
   #control-panel h2 {
@@ -111,24 +131,90 @@ header {
     top: 16px;
     left: 16px; }
   #control-panel #device-title {
-    flex: 1 0 100%;
+    flex: 1 1 100%;
     -webkit-flex: 1 0 100%;
-    height: 52px;
+    height: 50px;
     background: grey; }
     #control-panel #device-title h1 {
       font-size: 2em;
       font-weight: 500;
       color: white;
-      line-height: 52px;
+      line-height: 50px;
       padding-left: 16px; }
   #control-panel #timer {
     flex: 1 1 67%;
     -webkit-flex: 1 1 67%;
-    height: 174px;
+    height: 170px;
     border-bottom: 1px solid #dddddd;
     border-right: 1px solid #dddddd; }
   #control-panel #scent-strength {
     flex: 1 1 33%;
     -webkit-flex: 1 1 33%;
-    height: 174px;
+    height: 170px;
     border-bottom: 1px solid #dddddd; }
+  #control-panel .scent {
+    flex: 1 1 33%;
+    -webkit-flex: 1 1 33%;
+    height: 180px; }
+    #control-panel .scent:not(:first-child) {
+      border-left: 1px solid #dddddd; }
+    #control-panel .scent .thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 8px;
+      margin: 28px auto 16px; }
+    #control-panel .scent h3 {
+      font-size: 1.2em;
+      text-align: center;
+      margin-bottom: 24px; }
+    #control-panel .scent .remaining {
+      background-color: #dedede;
+      height: 8px;
+      width: 80%;
+      margin: 0 auto;
+      border-radius: 4px; }
+      #control-panel .scent .remaining span {
+        display: block;
+        height: 8px;
+        border-radius: 4px; }
+    #control-panel .scent button {
+      display: block;
+      height: 27px;
+      width: 84px;
+      border-radius: 0;
+      border: 1px solid grey;
+      color: grey;
+      line-height: 27px;
+      text-align: center;
+      background: none;
+      margin: 16px auto; }
+    #control-panel .scent.orange .thumb {
+      background: url("../img/scent_thumb/orange.jpg"); }
+    #control-panel .scent.orange h3 {
+      color: orange; }
+    #control-panel .scent.orange .remaining span {
+      background-color: orange; }
+    #control-panel .scent.peppermint .thumb {
+      background: url("../img/scent_thumb/peppermint.jpg"); }
+    #control-panel .scent.peppermint h3 {
+      color: #92ec5d; }
+    #control-panel .scent.peppermint .remaining span {
+      background-color: #92ec5d; }
+    #control-panel .scent.lavender .thumb {
+      background: url("../img/scent_thumb/lavender.jpg"); }
+    #control-panel .scent.lavender h3 {
+      color: #b25fec; }
+    #control-panel .scent.lavender .remaining span {
+      background-color: #b25fec; }
+    #control-panel .scent label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0; }
+    #control-panel .scent input[type=radio]:checked + label:after {
+      content: 'ON';
+      position: absolute;
+      bottom: 16px;
+      color: #bbb;
+      right: 16px; }

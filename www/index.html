@@ -26,6 +26,7 @@
         <script src="js/app.js"></script>
     </head>
     <body ng-app="ycapp">
+        <div id="master-bg"></div>
 
         <header>
             <img id="yankee-candle-logo" src="img/yc_logo.jpg" alt=""/>
@@ -50,7 +51,11 @@
 
                 <div id="which-device" ng-init="choseDevice = 'd002'">
                     <div class="radio-group" ng-repeat="(deviceId,deviceData) in deviceData.devices" ng-show="choseSystem === 'devices'">
-                        <div class="device-thumb" style="background-color: {{deviceData.color}}"></div>
+                        <div class="device-thumb" style="background-color: {{deviceData.color}}">
+                            <!-- show if a device is on in select device bar -->
+                            <div class="on-thumb" ng-show="deviceData.status.scent"></div>
+
+                        </div>
                         <input type="radio" name="which-device" ng-model="$parent.choseDevice"
                                value="{{deviceId}}" id="radio-device-{{deviceId}}"/>
                         <label for="radio-device-{{deviceId}}" style="border-color: {{deviceData.color}}"></label>
@@ -67,37 +72,36 @@
                 </div>
             </div>
 
-            <div id="control-panel" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()">
+            <div id="control-panel" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()"
+                style="border-bottom-color: {{choseDeviceData.color}}">
                 <div id="device-title" style="background-color:{{choseDeviceData.color}}">
                     <h1>{{choseDeviceData.name | titleCase}}</h1>
                 </div>
+
                 <div id="timer">
                     <h2>TIMER</h2>
                 </div>
+
                 <div id="scent-strength">
                     <h2>SCENT<br/>STRENGTH</h2>
                 </div>
-                <div id="scents">
 
-                </div>
+                    <div class="scent {{scentData.name}}" ng-repeat="(scentId, scentData) in choseDeviceData.scents">
+                        <div class="thumb"></div>
+                        <h3>{{scentData.name}}</h3>
+                        <div class="remaining">
+                            <span style="width: {{scentData.remain}}%"></span>
+                        </div>
+                        <input type="radio" name="which-scent" ng-model="choseDeviceData.status.scent"
+                               id="radio-scent-{{scentId}}" value="{{scentId}}"
+                               on-tap="scentOnTap(scentId)" ng-click="scentOnTap(scentId)"/>
+                        <label for="radio-scent-{{scentId}}"></label>
+
+                    </div>
             </div>
+
 
         </section>
 
-
-        <!--
-        <ion-pane ng-controller="mainController">
-
-            <ion-header-bar class="bar-stable">
-                <h1 class="title">YC Candle</h1>
-            </ion-header-bar>
-
-            <ion-content>
-                <div id="controll-panel">
-
-                </div>
-            </ion-content>
-        </ion-pane>
-        -->
     </body>
 </html>

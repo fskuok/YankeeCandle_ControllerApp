@@ -8,7 +8,7 @@
 }
 $font-default: "Verdana", sans-serif;
 $font-bold: "Verdana Bold", sans-serif;
-$universal-shadow: 0 1px 3px 0 rgba(0,0,0,.7);
+$universal-shadow: 0 1px 2px 0 rgba(0,0,0,.5);
 
 input[type=radio]{
     -webkit-appearance: none;
@@ -23,25 +23,41 @@ input[type=radio]{
 
 *{
     font-family: $font-default;
+    margin: 0;
+    padding: 0;
 }
 html, body{
     font-size: 10px;
 }
 
 
-
-$header-height: 64px;
-$control-panel-border: 1px solid #ddd;
-$control-panel-height: 400px;
-$control-panel-padding: 16px;
-    $device-title-height: 52px;
-    $timer-height: 174px;
-    $scent-height: $timer-height;
+$header-height: 72px;
+    $yc-logo-width: 72px;
 
 $choose-system-height: 40px;
 $choose-device-height: 60px;
-    $device-thumb-height: 32px;
+$device-thumb-size: 32px;
 
+$control-panel-border: 1px solid #ddd;
+$control-panel-height: 405px;
+$control-panel-border-bottom: 5px;
+$control-panel-padding: 16px;
+    $device-title-height: 50px;
+    $timer-height: 170px;
+    $scent-height: 180px;
+
+
+
+
+#master-bg{
+    z-index: -999;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #f0f0f0;
+}
 
 
 
@@ -55,11 +71,11 @@ header{
 
 
     #yankee-candle-logo{
-        width: 70px;
+        width: $yc-logo-width;
         position: absolute;
         left: 50%;
-        margin-left: -35px;
-        bottom: 8px;
+        margin-left: - $yc-logo-width/2;
+        bottom: 12px;
     }
 }
 
@@ -81,6 +97,7 @@ header{
     margin-top: $header-height;
     box-shadow: $universal-shadow;
     border-radius: 1px;
+    background-color: #ffffff;
 
     #device-or-cluster{
         div.radio-group{
@@ -128,14 +145,15 @@ header{
             input[type=radio]:checked + label{
                 opacity: 1;
                 border-bottom: 5px solid white;
+
             }
 
 
             div.device-thumb{
                 display: block;
-                height: $device-thumb-height;
-                width: $device-thumb-height;
-                border-radius: $device-thumb-height/2;
+                height: $device-thumb-size;
+                width: $device-thumb-size;
+                border-radius: $device-thumb-size/2;
 
 
                 position: absolute;
@@ -143,14 +161,20 @@ header{
                 left: 50%;
 
                 margin-top: 14px;
-                margin-left: - $device-thumb-height/2;
+                margin-left: - $device-thumb-size/2;
+
+                div.on-thumb{
+                    height: $device-thumb-size - 10px;
+                    width: $device-thumb-size - 10px;
+                    border: 3px solid white;
+                    border-radius: ($device-thumb-size - 10px)/2;
+                    margin: (10px)/2;
+                }
 
             }
         }
     }
-
 }
-
 
 #control-panel{
     height: 400px;
@@ -158,6 +182,8 @@ header{
     margin: 20px auto;
     box-shadow: $universal-shadow;
     border-radius: 1px;
+    border-bottom: 5px solid grey;
+    background-color: white;
 
     &>*{
         position: relative;
@@ -183,7 +209,7 @@ header{
             padding-left: $control-panel-padding;
         }
 
-        flex: 1 0 100%;
+        flex: 1 1 100%;
         -webkit-flex: 1 0 100%;
         height: $device-title-height;
         background: grey;
@@ -205,5 +231,90 @@ header{
         height: $timer-height;
         border-bottom: $control-panel-border;
     }
+
+    .scent{
+        flex: 1 1 33%;
+        -webkit-flex: 1 1 33%;
+        height: $scent-height;
+
+        &:not(:first-child){
+            border-left:  $control-panel-border;
+        }
+
+        .thumb{
+            $scent-thumb-size: 16px;
+            width: $scent-thumb-size;
+            height: $scent-thumb-size;
+            border-radius: $scent-thumb-size/2;
+            margin: 28px auto 16px;
+        }
+
+        h3{
+            font-size: 1.2em;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .remaining{
+            $remaining-height: 8px;
+            background-color: #dedede;
+
+            height: $remaining-height;
+            width: 80%;
+            margin: 0 auto;
+            border-radius: $remaining-height/2;
+
+            span{
+                display: block;
+                height: $remaining-height;
+                border-radius: $remaining-height/2;
+
+            }
+        }
+
+        button{
+            display: block;
+            height: 27px;
+            width: 84px;
+            border-radius: 0;
+            border: 1px solid grey;
+            color: grey;
+            line-height: 27px;
+            text-align: center;
+            background: none;
+            margin: 16px auto;
+        }
+
+
+        @mixin scent-style($name, $color){
+            .thumb{ background: url('../img/scent_thumb/' + $name + '.jpg'); }
+            h3{  color: $color; }
+            .remaining span{ background-color: $color; }
+        }
+
+        &.orange { @include scent-style('orange', orange)};
+        &.peppermint { @include scent-style('peppermint', #92ec5d) };
+        &.lavender { @include scent-style('lavender', #b25fec) };
+        
+        label{
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+        input[type=radio]:checked + label:after{
+            content: 'ON';
+            position: absolute;
+            bottom: $control-panel-padding;
+            color: #bbb;
+            right: $control-panel-padding;
+        }
+
+    }
+
+
+
+
 }
 
