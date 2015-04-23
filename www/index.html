@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title></title>
+
+        <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+
+        <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+        <link href="css/ionic.app.css" rel="stylesheet">
+        -->
+
+        <!-- ionic/angularjs js -->
+        <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+        <!-- ng-cordova js -->
+        <script src="lib/ng-cordova/dist/ng-cordova.js"></script>
+
+        <!-- cordova script (this will be a 404 during development) -->
+
+        <script src="cordova.js"></script>
+
+        <!-- your app's js -->
+        <script src="js/app.js"></script>
+    </head>
+    <body ng-app="ycapp">
+
+        <header>
+            <img id="yankee-candle-logo" src="img/yc_logo.jpg" alt=""/>
+        </header>
+
+        <section ng-controller="controlController">
+            <div id="device-select">
+                <div id="device-or-cluster" ng-init="choseSystem = 'devices'">
+
+                    <div class="radio-group">
+                        <input type="radio" name="device-or-cluster" ng-model="choseSystem"
+                               value="devices" id="radio-device" ng-init="choseSystem = 'devices'"/>
+                        <label for="radio-device">DEVICE</label>
+                    </div>
+
+                    <div class="radio-group">
+                        <input type="radio" name="device-or-cluster" ng-model="choseSystem"
+                               value="clusters" id="radio-cluster"/>
+                        <label for="radio-cluster">CLUSTER</label>
+                    </div>
+                </div>
+
+                <div id="which-device" ng-init="choseDevice = 'd002'">
+                    <div class="radio-group" ng-repeat="(deviceId,deviceData) in deviceData.devices" ng-show="choseSystem === 'devices'">
+                        <div class="device-thumb" style="background-color: {{deviceData.color}}"></div>
+                        <input type="radio" name="which-device" ng-model="$parent.choseDevice"
+                               value="{{deviceId}}" id="radio-device-{{deviceId}}"/>
+                        <label for="radio-device-{{deviceId}}" style="border-color: {{deviceData.color}}"></label>
+
+                    </div>
+
+                    <div class="radio-group" ng-repeat="(clusterId,clusterData) in deviceData.clusters" ng-show="choseSystem === 'clusters'">
+                        <div class="device-thumb" style="background-color: {{clusterData.color}}"></div>
+                        <input type="radio" name="which-cluster" ng-model="$parent.choseCluster"
+                               value="{{clusterId}}" id="radio-cluster-{{clusterId}}"/>
+                        <label for="radio-cluster-{{clusterId}}" style="border-color: {{clusterData.color}}"></label>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="control-panel">
+                <div id="device-title" style="background-color:{{choseDeviceData.color}}">
+                    <h1>{{choseDeviceData.name | titleCase}}</h1>
+                </div>
+                <div id="timer">
+                    <h2>TIMER</h2>
+                </div>
+                <div id="scent-strength">
+                    <h2>SCENT<br/>STRENGTH</h2>
+                </div>
+                <div id="scents">
+
+                </div>
+            </div>
+
+        </section>
+
+
+        <!--
+        <ion-pane ng-controller="mainController">
+
+            <ion-header-bar class="bar-stable">
+                <h1 class="title">YC Candle</h1>
+            </ion-header-bar>
+
+            <ion-content>
+                <div id="controll-panel">
+
+                </div>
+            </ion-content>
+        </ion-pane>
+        -->
+    </body>
+</html>

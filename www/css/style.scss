@@ -1,0 +1,207 @@
+@font-face {
+    font-family: "Verdana";
+    src: url('../font/Verdana.ttf');
+}
+@font-face {
+    font-family: "Verdana Bold";
+    src: url('../font/Verdana%20Bold.ttf');
+}
+$font-default: "Verdana", sans-serif;
+$font-bold: "Verdana Bold", sans-serif;
+$universal-shadow: 0 1px 3px 0 rgba(0,0,0,.7);
+
+input[type=radio]{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    border: none;
+    display: none;
+}
+
+*{
+    font-family: $font-default;
+}
+html, body{
+    font-size: 10px;
+}
+
+
+
+$header-height: 64px;
+$control-panel-border: 1px solid #ddd;
+$control-panel-height: 400px;
+$control-panel-padding: 16px;
+    $device-title-height: 52px;
+    $timer-height: 174px;
+    $scent-height: $timer-height;
+
+$choose-system-height: 40px;
+$choose-device-height: 60px;
+    $device-thumb-height: 32px;
+
+
+
+
+header{
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: $header-height;
+    background: white;
+    box-shadow: $universal-shadow;
+
+
+    #yankee-candle-logo{
+        width: 70px;
+        position: absolute;
+        left: 50%;
+        margin-left: -35px;
+        bottom: 8px;
+    }
+}
+
+#device-or-cluster, #which-device, #control-panel{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    align-content: flex-start;
+    -webkit-align-content: flex-start;
+    width: 100%;
+}
+
+#device-select{
+    width: 100%;
+    z-index: 1;
+    margin-top: $header-height;
+    box-shadow: $universal-shadow;
+
+    #device-or-cluster{
+        div.radio-group{
+            height: $choose-system-height;
+            flex: 1;
+            -webkit-flex: 1;
+            border-bottom: $control-panel-border;
+
+            input[type=radio] + label{
+                height: $choose-system-height;
+                width: 100%;
+                background-color: rgba(0,0,0,.2);
+                text-align: center;
+                line-height: $choose-system-height;
+                font-family: $font-bold;
+                font-size: 1em;
+                display: block;
+                transition: all 0.6s;
+            }
+
+            input[type=radio]:checked + label{
+                background-color: rgba(0,0,0,0);
+            }
+        }
+    }
+
+    #which-device{
+        div.radio-group{
+            height: $choose-device-height;
+            text-align: center;
+            flex: 1;
+            -webkit-flex: 1;
+            position: relative;
+
+
+            label{
+                display: block;
+                height: $choose-device-height;
+                width: 100%;
+                border-bottom: 0 solid white;
+                opacity: 0;
+                transition: all 0.6s;
+            }
+
+            input[type=radio]:checked + label{
+                opacity: 1;
+                border-bottom: 5px solid white;
+            }
+
+
+            div.device-thumb{
+                display: block;
+                height: $device-thumb-height;
+                width: $device-thumb-height;
+                border-radius: $device-thumb-height/2;
+
+
+                position: absolute;
+                top: 0;
+                left: 50%;
+
+                margin-top: 14px;
+                margin-left: - $device-thumb-height/2;
+
+            }
+        }
+    }
+
+}
+
+
+#control-panel{
+    height: 400px;
+    width: 350px;
+    margin: 20px auto;
+    box-shadow: $universal-shadow;
+
+    &>*{
+        position: relative;
+    }
+
+    h2{
+        font-size: 1em;
+        font-family: $font-bold;
+        color: #bbb;
+        position: absolute;
+        top: $control-panel-padding;
+        left: $control-panel-padding;
+    }
+
+
+    #device-title{
+
+        h1{
+            font-size: 2em;
+            font-weight: 500;
+            color: white;
+            line-height: $device-title-height;
+            padding-left: $control-panel-padding;
+        }
+
+        flex: 1 0 100%;
+        -webkit-flex: 1 0 100%;
+        height: $device-title-height;
+        background: grey;
+
+
+    }
+
+    #timer{
+        flex: 1 1 67%;
+        -webkit-flex: 1 1 67%;
+        height:$timer-height;
+        border-bottom: $control-panel-border;
+        border-right: $control-panel-border;
+    }
+
+    #scent-strength{
+        flex: 1 1 33%;
+        -webkit-flex: 1 1 33%;
+        height: $timer-height;
+        border-bottom: $control-panel-border;
+    }
+}
+
