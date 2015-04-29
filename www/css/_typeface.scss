@@ -1,0 +1,10 @@
+@font-face {
+    font-family: "Verdana";
+    src: url('../font/Verdana.ttf');
+}
+@font-face {
+    font-family: "Verdana Bold";
+    src: url('../font/Verdana%20Bold.ttf');
+}
+$font-default: "Verdana", sans-serif;
+$font-bold: "Verdana Bold", sans-serif;

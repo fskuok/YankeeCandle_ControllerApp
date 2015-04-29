@@ -14,38 +14,136 @@ input[type=radio] {
   border: none;
   display: none; }
 
-* {
+input[type=range] {
+  -webkit-appearance: none;
+  /* Hides the slider so that custom slider can be made */
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  width: 100%;
+  /* Specific width is required for Firefox. */ }
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; }
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; }
+
+input[type=range]:focus {
+  outline: none;
+  /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */ }
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: transparent;
+  /* Hides the slider so custom styles can be added */
+  border-color: transparent;
+  color: transparent; }
+
+*, h1, h2, h3, h4, h5, h6, p {
   font-family: "Verdana", sans-serif;
   margin: 0;
   padding: 0; }
 
+h2 {
+  font-size: 1em;
+  font-family: "Verdana Bold", sans-serif;
+  color: #bbb; }
+
 html, body {
   font-size: 10px; }
 
-#master-bg {
-  z-index: -999;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #f0f0f0; }
-
+/* the button size is bigger than iOS guideline since the pngs are not cropped minimizly */
 header {
   position: fixed;
-  z-index: 999;
+  z-index: 10;
   width: 100%;
-  height: 72px;
+  height: 64px;
   background: white;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5); }
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2); }
+  header #header-left-button,
+  header #header-right-button {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    bottom: 0;
+    background-size: 24px auto;
+    background-position: center;
+    background-repeat: no-repeat; }
+  header #header-left-button {
+    left: 0; }
+    header #header-left-button.back {
+      background-image: url("../img/icons/ios7-arrow-back.png"); }
+  header #header-right-button {
+    right: 0; }
   header #yankee-candle-logo {
-    width: 72px;
+    width: 64px;
     position: absolute;
     left: 50%;
-    margin-left: -36px;
+    margin-left: -32px;
     bottom: 12px; }
 
-#device-or-cluster, #which-device, #control-panel {
+.pane {
+  padding-top: 64px; }
+
+nav {
+  height: 5.6em;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  align-content: flex-start;
+  -webkit-align-content: flex-start;
+  border-radius: 1px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  background: #ffffff; }
+  nav label {
+    -webkit-flex: 1 1 25%;
+    flex: 1 1 25%;
+    height: 100%;
+    text-align: center;
+    font-family: "Verdana Bold", sans-serif;
+    font-size: 1em;
+    line-height: 9em;
+    color: #5a656f;
+    position: relative;
+    /* nav icon */ }
+    nav label:before {
+      content: '';
+      height: 3.2em;
+      width: 3.2em;
+      /* POSITION */
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      margin-left: -1.6em;
+      background-size: 100% 100%; }
+    nav label[for=nav-control-button]:before {
+      background-image: url("../img/icons/control.png"); }
+    nav label[for=nav-shop-button]:before {
+      background-image: url("../img/icons/cart.png"); }
+    nav label[for=nav-status-button]:before {
+      background-image: url("../img/icons/status.png"); }
+    nav label[for=nav-setting-button]:before {
+      background-image: url("../img/icons/setting.png"); }
+  nav input[type=radio]:checked + label {
+    background: rgba(0, 0, 0, 0.2); }
+
+.pane {
+  background: #e8e8e8; }
+
+#choose-system,
+#choose-device,
+#control-panel {
   display: flex;
   display: -webkit-flex;
   flex-direction: row;
@@ -59,16 +157,15 @@ header {
 #device-select {
   width: 100%;
   z-index: 1;
-  margin-top: 72px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border-radius: 1px;
   background-color: #ffffff; }
-  #device-select #device-or-cluster div.radio-group {
+  #device-select #choose-system div.radio-group {
     height: 40px;
     flex: 1;
     -webkit-flex: 1;
-    border-bottom: 1px solid #dddddd; }
-    #device-select #device-or-cluster div.radio-group input[type=radio] + label {
+    border-bottom: 1px solid #eeeeee; }
+    #device-select #choose-system div.radio-group input[type=radio] + label {
       height: 40px;
       width: 100%;
       background-color: rgba(0, 0, 0, 0.2);
@@ -78,25 +175,27 @@ header {
       font-size: 1em;
       display: block;
       transition: all 0.6s; }
-    #device-select #device-or-cluster div.radio-group input[type=radio]:checked + label {
+    #device-select #choose-system div.radio-group input[type=radio]:checked + label {
       background-color: transparent; }
-  #device-select #which-device div.radio-group {
+  #device-select #choose-device div.radio-group {
     height: 60px;
     text-align: center;
     flex: 1;
     -webkit-flex: 1;
     position: relative; }
-    #device-select #which-device div.radio-group label {
+    #device-select #choose-device div.radio-group:not(:first-child) {
+      border-left: 1px solid #eeeeee; }
+    #device-select #choose-device div.radio-group label {
       display: block;
       height: 60px;
       width: 100%;
       border-bottom: 0 solid white;
       opacity: 0;
       transition: all 0.6s; }
-    #device-select #which-device div.radio-group input[type=radio]:checked + label {
+    #device-select #choose-device div.radio-group input[type=radio]:checked + label {
       opacity: 1;
       border-bottom: 5px solid white; }
-    #device-select #which-device div.radio-group div.device-thumb {
+    #device-select #choose-device div.radio-group div.device-thumb {
       display: block;
       height: 32px;
       width: 32px;
@@ -106,7 +205,7 @@ header {
       left: 50%;
       margin-top: 14px;
       margin-left: -16px; }
-      #device-select #which-device div.radio-group div.device-thumb div.on-thumb {
+      #device-select #choose-device div.radio-group div.device-thumb div.on-thumb {
         height: 22px;
         width: 22px;
         border: 3px solid white;
@@ -114,19 +213,16 @@ header {
         margin: 5px; }
 
 #control-panel {
-  height: 400px;
+  height: 425px;
   width: 350px;
-  margin: 20px auto;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  margin: 40px auto;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border-radius: 1px;
   border-bottom: 5px solid grey;
   background-color: white; }
   #control-panel > * {
     position: relative; }
   #control-panel h2 {
-    font-size: 1em;
-    font-family: "Verdana Bold", sans-serif;
-    color: #bbb;
     position: absolute;
     top: 16px;
     left: 16px; }
@@ -140,28 +236,72 @@ header {
       font-weight: 500;
       color: white;
       line-height: 50px;
-      padding-left: 16px; }
+      padding-left: 16px;
+      position: relative; }
+    #control-panel #device-title #control-panel-setting {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 50px;
+      width: 50px;
+      background-image: url("../img/icons/setting_white_24.png");
+      background-position: center;
+      background-size: 24px auto;
+      background-repeat: no-repeat; }
   #control-panel #timer {
     flex: 1 1 67%;
     -webkit-flex: 1 1 67%;
     height: 170px;
-    border-bottom: 1px solid #dddddd;
-    border-right: 1px solid #dddddd; }
+    border-bottom: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee; }
   #control-panel #scent-strength {
     flex: 1 1 33%;
     -webkit-flex: 1 1 33%;
     height: 170px;
-    border-bottom: 1px solid #dddddd; }
+    border-bottom: 1px solid #eeeeee; }
+    #control-panel #scent-strength #scent-strength-slider {
+      width: 100px;
+      transform: translate(10px, 90px) rotate(-90deg);
+      -webkit-transform: translate(10px, 90px) rotate(-90deg); }
+    #control-panel #scent-strength #scent-strength-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 32px;
+      width: 18px;
+      border-radius: 3px;
+      background-color: #ffffff;
+      cursor: pointer;
+      margin-top: -12px;
+      /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+      /* Add cool effects to your sliders! */ }
+    #control-panel #scent-strength #scent-strength-slider::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 8px;
+      cursor: pointer;
+      background: #6f7071;
+      border-radius: 4px; }
+  #control-panel #scents-title {
+    flex: 1 1 100%;
+    -webkit-flex: 1 1 100%;
+    height: 35px;
+    padding-left: 16px;
+    color: grey;
+    border-bottom: 1px solid #eeeeee; }
+    #control-panel #scents-title span {
+      color: #dedede;
+      font: "Verdana", sans-serif;
+      margin-left: 20px; }
   #control-panel .scent {
     flex: 1 1 33%;
     -webkit-flex: 1 1 33%;
-    height: 180px; }
+    height: 165px;
+    /* Indicator of a scent turning on */ }
     #control-panel .scent:not(:first-child) {
-      border-left: 1px solid #dddddd; }
+      border-left: 1px solid #eeeeee; }
     #control-panel .scent .thumb {
-      width: 16px;
-      height: 16px;
-      border-radius: 8px;
+      width: 32px;
+      height: 32px;
+      border-radius: 16px;
       margin: 28px auto 16px; }
     #control-panel .scent h3 {
       font-size: 1.2em;
@@ -176,7 +316,8 @@ header {
       #control-panel .scent .remaining span {
         display: block;
         height: 8px;
-        border-radius: 4px; }
+        border-radius: 4px;
+        transition: width 0.4s; }
     #control-panel .scent button {
       display: block;
       height: 27px;
@@ -188,33 +329,73 @@ header {
       text-align: center;
       background: none;
       margin: 16px auto; }
-    #control-panel .scent.orange .thumb {
-      background: url("../img/scent_thumb/orange.jpg"); }
-    #control-panel .scent.orange h3 {
-      color: orange; }
-    #control-panel .scent.orange .remaining span {
-      background-color: orange; }
-    #control-panel .scent.peppermint .thumb {
-      background: url("../img/scent_thumb/peppermint.jpg"); }
-    #control-panel .scent.peppermint h3 {
-      color: #92ec5d; }
-    #control-panel .scent.peppermint .remaining span {
-      background-color: #92ec5d; }
-    #control-panel .scent.lavender .thumb {
-      background: url("../img/scent_thumb/lavender.jpg"); }
-    #control-panel .scent.lavender h3 {
-      color: #b25fec; }
-    #control-panel .scent.lavender .remaining span {
-      background-color: #b25fec; }
     #control-panel .scent label {
       position: absolute;
       top: 0;
       left: 0;
       bottom: 0;
       right: 0; }
-    #control-panel .scent input[type=radio]:checked + label:after {
+    #control-panel .scent input[type=radio] + label:after {
       content: 'ON';
-      position: absolute;
+      font-size: 0;
       bottom: 16px;
-      color: #bbb;
-      right: 16px; }
+      right: 16px;
+      transition: all 0.4s;
+      position: absolute; }
+    #control-panel .scent input[type=radio]:checked + label:after {
+      font-size: 1em; }
+    #control-panel .scent.orange .thumb {
+      background: url("../img/scent_thumb/orange_32.jpg"); }
+    #control-panel .scent.orange h3 {
+      color: orange; }
+    #control-panel .scent.orange .remaining span {
+      background-color: orange; }
+    #control-panel .scent.orange input[type=radio]:checked + label:after {
+      color: orange; }
+    #control-panel .scent.peppermint .thumb {
+      background: url("../img/scent_thumb/peppermint_32.jpg"); }
+    #control-panel .scent.peppermint h3 {
+      color: #92ec5d; }
+    #control-panel .scent.peppermint .remaining span {
+      background-color: #92ec5d; }
+    #control-panel .scent.peppermint input[type=radio]:checked + label:after {
+      color: #92ec5d; }
+    #control-panel .scent.lavender .thumb {
+      background: url("../img/scent_thumb/lavender_32.jpg"); }
+    #control-panel .scent.lavender h3 {
+      color: #b25fec; }
+    #control-panel .scent.lavender .remaining span {
+      background-color: #b25fec; }
+    #control-panel .scent.lavender input[type=radio]:checked + label:after {
+      color: #b25fec; }
+
+#control-setting-view > div {
+  padding: 16px;
+  border-bottom: 1px solid grey;
+  background: white; }
+#control-setting-view div.yc-setting-color {
+  background: white; }
+  #control-setting-view div.yc-setting-color .sample {
+    width: 44px;
+    height: 44px;
+    border-radius: 22px; }
+  #control-setting-view div.yc-setting-color input[type=range].color-picker {
+    height: 40px; }
+    #control-setting-view div.yc-setting-color input[type=range].color-picker::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 32px;
+      width: 18px;
+      border-radius: 3px;
+      background: white;
+      cursor: pointer;
+      margin-top: -12px;
+      /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+      /* Add cool effects to your sliders! */ }
+    #control-setting-view div.yc-setting-color input[type=range].color-picker::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 8px;
+      cursor: pointer;
+      background: linear-gradient(left, hsl(0, 85%, 65%) 0%, hsl(22.5, 85%, 65%) 6.25%, hsl(45, 85%, 65%) 12.5%, hsl(67.5, 85%, 65%) 18.75%, hsl(90, 85%, 65%) 25%, hsl(112.5, 85%, 65%) 31.25%, hsl(135, 85%, 65%) 37.5%, hsl(157.5, 85%, 65%) 43.75%, hsl(180, 85%, 65%) 50%, hsl(202.5, 85%, 65%) 56.25%, hsl(225, 85%, 65%) 62.5%, hsl(247.5, 85%, 65%) 68.75%, hsl(270, 85%, 65%) 75%, hsl(292.5, 85%, 65%) 81.25%, hsl(315, 85%, 65%) 87.5%, hsl(337.5, 85%, 65%) 93.75%);
+      background: -webkit-linear-gradient(left, hsl(0, 85%, 65%) 0%, hsl(22.5, 85%, 65%) 6.25%, hsl(45, 85%, 65%) 12.5%, hsl(67.5, 85%, 65%) 18.75%, hsl(90, 85%, 65%) 25%, hsl(112.5, 85%, 65%) 31.25%, hsl(135, 85%, 65%) 37.5%, hsl(157.5, 85%, 65%) 43.75%, hsl(180, 85%, 65%) 50%, hsl(202.5, 85%, 65%) 56.25%, hsl(225, 85%, 65%) 62.5%, hsl(247.5, 85%, 65%) 68.75%, hsl(270, 85%, 65%) 75%, hsl(292.5, 85%, 65%) 81.25%, hsl(315, 85%, 65%) 87.5%, hsl(337.5, 85%, 65%) 93.75%);
+      border-radius: 4px; }

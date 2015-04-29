@@ -1,0 +1,67 @@
+#control-setting-view{
+    & > div {
+        padding: 16px;
+        border-bottom: 1px solid grey;
+        background: white;
+
+    }
+
+
+    div.device-name{
+
+    }
+
+    div.yc-setting-color{
+        $setting-color-slider-width: 32px;
+        $setting-color-slider-height: 18px;
+        $setting-color-track-height: 8px;
+        $setting-color-sample-size: 44px;
+        background: white;
+
+        .sample{
+            width: $setting-color-sample-size;
+            height: $setting-color-sample-size;
+            border-radius: $setting-color-sample-size/2;
+        }
+
+
+        input[type=range].color-picker{
+            height: 40px;
+
+            &::-webkit-slider-thumb{
+                -webkit-appearance: none;
+                height: $setting-color-slider-width;
+                width: $setting-color-slider-height;
+                border-radius: 3px;
+                background: white;
+                cursor: pointer;
+                margin-top: - ($setting-color-slider-width - $setting-color-track-height)/2; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+                box-shadow: $universal-shadow; /* Add cool effects to your sliders! */
+            }
+            @mixin hue-linear-gradient($dir){
+                $steps: 16;
+                $str: $dir;
+                @for $i from 0 to $steps{
+                    $str : $str + ', hsl(' +  ($i* 360 / $steps) +', 85%, 65%) ' + ($i * 100 / $steps )  + '%';
+                }
+
+                background: linear-gradient(#{$str});
+                background: -webkit-linear-gradient(#{$str});
+            }
+
+            &::-webkit-slider-runnable-track {
+                width: 100%;
+                height: $setting-color-track-height;
+                cursor: pointer;
+                //box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+                @include hue-linear-gradient('left');
+
+                //background: linear-gradient(left,  hsl(0, 85%, 65%) 0%,  hsl(90, 85%, 65%) 25%,  hsl(180, 85%, 65%) 50%,  hsl(270, 85%, 65%) 75%, hsl(360, 85%, 65%) 100%);
+                //background: -webkit-linear-gradient(left,  hsl(0, 85%, 65%) 0%,  hsl(90, 85%, 65%) 25%,  hsl(180, 85%, 65%) 50%,  hsl(270, 85%, 65%) 75%, hsl(360, 85%, 65%) 100%);
+                border-radius: 4px;
+                //border: 0.2px solid #010101;
+            }
+        }
+
+    }
+}

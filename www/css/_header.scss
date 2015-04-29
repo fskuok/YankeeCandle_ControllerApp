@@ -1,0 +1,47 @@
+$status-bar-height: 20px;
+$navigation-height: 44px;
+$header-height: $status-bar-height + $navigation-height;
+$yc-logo-width: 64px;
+/* the button size is bigger than iOS guideline since the pngs are not cropped minimizly */
+$header-button-icon-size: 24px;
+
+header{
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    height: $header-height;
+    background: white;
+    box-shadow: $universal-shadow;
+
+    #header-left-button,
+    #header-right-button{
+        position: absolute;
+        width: $navigation-height;
+        height: $navigation-height;
+        bottom: 0;
+        background-size: $header-button-icon-size auto;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    #header-left-button{
+        left: 0;
+        &.back{ background-image: url('../img/icons/ios7-arrow-back.png'); }
+    }
+
+    #header-right-button{
+        right: 0;
+    }
+
+    #yankee-candle-logo{
+        width: $yc-logo-width;
+        position: absolute;
+        left: 50%;
+        margin-left: - $yc-logo-width/2;
+        bottom: 12px;
+    }
+}
+
+.pane{
+    padding-top: $header-height;
+}

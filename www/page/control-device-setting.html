@@ -1,0 +1,11 @@
+<div id="control-setting-view">
+    <h1>{{systemType}} Setting</h1>
+    <div class="device-name"><h2>NAME</h2><p>{{deviceData.name}}</p></div>
+    <div class="yc-setting-color">
+        <h2>COLOR</h2>
+        <div class="sample" style="background-color: hsl({{deviceData.color}}, 85%, 65%)"></div>
+        <input class="color-picker" type="range" min="0" max="360" step="1"
+               ng-model="deviceData.color" />
+
+    </div>
+</div>
