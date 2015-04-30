@@ -254,11 +254,62 @@ nav {
     height: 170px;
     border-bottom: 1px solid #eeeeee;
     border-right: 1px solid #eeeeee; }
+    #control-panel #timer #timer-slider {
+      width: calc(100% - 32px);
+      margin: 100px 16px 0; }
+    #control-panel #timer #timer-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 32px;
+      width: 18px;
+      border-radius: 3px;
+      background-color: #ffffff;
+      cursor: pointer;
+      margin-top: -12px;
+      /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+      /* Add cool effects to your sliders! */ }
+    #control-panel #timer #timer-slider::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 8px;
+      cursor: pointer;
+      background: #bbb;
+      border-radius: 4px; }
+    #control-panel #timer p#current-timer {
+      position: absolute;
+      top: 30%;
+      left: 16px;
+      font-size: 1.2em;
+      color: grey;
+      font-family: "Verdana Bold", sans-serif; }
+@keyframes flash {
+  #control-panel #timer p#current-timer 0%  {
+    opacity: 0; }
+  #control-panel #timer p#current-timer 50%  {
+    opacity: 1; }
+  #control-panel #timer p#current-timer 100%  {
+    opacity: 0; } }
+@-webkit-keyframes flash {
+  #control-panel #timer p#current-timer 0%  {
+    opacity: 0; }
+  #control-panel #timer p#current-timer 50%  {
+    opacity: 1; }
+  #control-panel #timer p#current-timer 100%  {
+    opacity: 0; } }
+      #control-panel #timer p#current-timer span {
+        animation: flash 0.5s infinite alternate;
+        -webkit-animation: flash 0.5s infinite alternate; }
   #control-panel #scent-strength {
     flex: 1 1 33%;
     -webkit-flex: 1 1 33%;
     height: 170px;
     border-bottom: 1px solid #eeeeee; }
+    #control-panel #scent-strength p#current-scent-strength {
+      position: absolute;
+      top: 50%;
+      left: 16px;
+      font-size: 1.2em;
+      color: grey;
+      font-family: "Verdana Bold", sans-serif; }
     #control-panel #scent-strength #scent-strength-slider {
       width: 100px;
       transform: translate(10px, 90px) rotate(-90deg);
@@ -278,7 +329,7 @@ nav {
       width: 100%;
       height: 8px;
       cursor: pointer;
-      background: #6f7071;
+      background: #bbb;
       border-radius: 4px; }
   #control-panel #scents-title {
     flex: 1 1 100%;
@@ -373,15 +424,19 @@ nav {
   padding: 16px;
   border-bottom: 1px solid grey;
   background: white; }
-#control-setting-view div.yc-setting-color {
+  #control-setting-view > div > * {
+    margin-top: 12px; }
+#control-setting-view div.device-name p {
+  font-size: 1.4em; }
+#control-setting-view div.setting-color {
   background: white; }
-  #control-setting-view div.yc-setting-color .sample {
-    width: 44px;
-    height: 44px;
-    border-radius: 22px; }
-  #control-setting-view div.yc-setting-color input[type=range].color-picker {
+  #control-setting-view div.setting-color .sample {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px; }
+  #control-setting-view div.setting-color input[type=range].color-picker {
     height: 40px; }
-    #control-setting-view div.yc-setting-color input[type=range].color-picker::-webkit-slider-thumb {
+    #control-setting-view div.setting-color input[type=range].color-picker::-webkit-slider-thumb {
       -webkit-appearance: none;
       height: 32px;
       width: 18px;
@@ -392,10 +447,10 @@ nav {
       /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
       /* Add cool effects to your sliders! */ }
-    #control-setting-view div.yc-setting-color input[type=range].color-picker::-webkit-slider-runnable-track {
+    #control-setting-view div.setting-color input[type=range].color-picker::-webkit-slider-runnable-track {
       width: 100%;
       height: 8px;
       cursor: pointer;
-      background: linear-gradient(left, hsl(0, 85%, 65%) 0%, hsl(22.5, 85%, 65%) 6.25%, hsl(45, 85%, 65%) 12.5%, hsl(67.5, 85%, 65%) 18.75%, hsl(90, 85%, 65%) 25%, hsl(112.5, 85%, 65%) 31.25%, hsl(135, 85%, 65%) 37.5%, hsl(157.5, 85%, 65%) 43.75%, hsl(180, 85%, 65%) 50%, hsl(202.5, 85%, 65%) 56.25%, hsl(225, 85%, 65%) 62.5%, hsl(247.5, 85%, 65%) 68.75%, hsl(270, 85%, 65%) 75%, hsl(292.5, 85%, 65%) 81.25%, hsl(315, 85%, 65%) 87.5%, hsl(337.5, 85%, 65%) 93.75%);
-      background: -webkit-linear-gradient(left, hsl(0, 85%, 65%) 0%, hsl(22.5, 85%, 65%) 6.25%, hsl(45, 85%, 65%) 12.5%, hsl(67.5, 85%, 65%) 18.75%, hsl(90, 85%, 65%) 25%, hsl(112.5, 85%, 65%) 31.25%, hsl(135, 85%, 65%) 37.5%, hsl(157.5, 85%, 65%) 43.75%, hsl(180, 85%, 65%) 50%, hsl(202.5, 85%, 65%) 56.25%, hsl(225, 85%, 65%) 62.5%, hsl(247.5, 85%, 65%) 68.75%, hsl(270, 85%, 65%) 75%, hsl(292.5, 85%, 65%) 81.25%, hsl(315, 85%, 65%) 87.5%, hsl(337.5, 85%, 65%) 93.75%);
+      background: linear-gradient(left, hsl(0, 85%, 55%) 0%, hsl(22.5, 85%, 55%) 6.25%, hsl(45, 85%, 55%) 12.5%, hsl(67.5, 85%, 55%) 18.75%, hsl(90, 85%, 55%) 25%, hsl(112.5, 85%, 55%) 31.25%, hsl(135, 85%, 55%) 37.5%, hsl(157.5, 85%, 55%) 43.75%, hsl(180, 85%, 55%) 50%, hsl(202.5, 85%, 55%) 56.25%, hsl(225, 85%, 55%) 62.5%, hsl(247.5, 85%, 55%) 68.75%, hsl(270, 85%, 55%) 75%, hsl(292.5, 85%, 55%) 81.25%, hsl(315, 85%, 55%) 87.5%, hsl(337.5, 85%, 55%) 93.75%);
+      background: -webkit-linear-gradient(left, hsl(0, 85%, 55%) 0%, hsl(22.5, 85%, 55%) 6.25%, hsl(45, 85%, 55%) 12.5%, hsl(67.5, 85%, 55%) 18.75%, hsl(90, 85%, 55%) 25%, hsl(112.5, 85%, 55%) 31.25%, hsl(135, 85%, 55%) 37.5%, hsl(157.5, 85%, 55%) 43.75%, hsl(180, 85%, 55%) 50%, hsl(202.5, 85%, 55%) 56.25%, hsl(225, 85%, 55%) 62.5%, hsl(247.5, 85%, 55%) 68.75%, hsl(270, 85%, 55%) 75%, hsl(292.5, 85%, 55%) 81.25%, hsl(315, 85%, 55%) 87.5%, hsl(337.5, 85%, 55%) 93.75%);
       border-radius: 4px; }

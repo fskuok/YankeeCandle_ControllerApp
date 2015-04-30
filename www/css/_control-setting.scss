@@ -4,24 +4,35 @@
         border-bottom: 1px solid grey;
         background: white;
 
+        &>*{
+            margin-top: 12px;
+        }
+
     }
+
 
 
     div.device-name{
+        p{
+            font-size: 1.4em;
+        }
 
     }
 
-    div.yc-setting-color{
+    div.setting-color{
         $setting-color-slider-width: 32px;
         $setting-color-slider-height: 18px;
         $setting-color-track-height: 8px;
-        $setting-color-sample-size: 44px;
+        $setting-color-sample-size: 32px;
         background: white;
 
         .sample{
             width: $setting-color-sample-size;
             height: $setting-color-sample-size;
             border-radius: $setting-color-sample-size/2;
+
+
+
         }
 
 
@@ -42,7 +53,7 @@
                 $steps: 16;
                 $str: $dir;
                 @for $i from 0 to $steps{
-                    $str : $str + ', hsl(' +  ($i* 360 / $steps) +', 85%, 65%) ' + ($i * 100 / $steps )  + '%';
+                    $str : $str + ', hsl(' +  ($i* 360 / $steps) +', 85%, 55%) ' + ($i * 100 / $steps )  + '%';
                 }
 
                 background: linear-gradient(#{$str});

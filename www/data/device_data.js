@@ -1,8 +1,9 @@
 var dummyDeviceData = {
     "devices":{
         "d001":{
+            "sparkId": "",
             "name": "bedroom table",
-            "color": 34, //Hue value range from 0 to 360
+            "color": 30, //Hue value range from 0 to 360
             "scents":{
                 "scent01": {
                     "name": "peppermint",
@@ -19,13 +20,14 @@ var dummyDeviceData = {
             },
             "status" : {
                 "scent": null, //indicates ON/OFF also
-                "timer": 60000, //ms
+                "timer": 0, //ms
                 "strength": 0
             }
         },
         "d002":{
+            "sparkId": "",
             "name": "living room 1",
-            "color": 240,
+            "color": 80,
             "scents":{
                 "scent01": {
                     "name": "peppermint",
@@ -42,13 +44,14 @@ var dummyDeviceData = {
             },
             "status" : {
                 "scent": null, //indicates ON/OFF also
-                "timer": 60000, //ms
+                "timer": 0, //ms
                 "strength": 0
             }
         },
         "d003":{
+            "sparkId": "",
             "name": "bedroom window sill",
-            "color": 172,
+            "color": 180,
             "scents":{
                 "scent01": {
                     "name": "peppermint",
@@ -65,7 +68,7 @@ var dummyDeviceData = {
             },
             "status" : {
                 "scent": null, //indicates ON/OFF also
-                "timer": 60000, //ms
+                "timer": 0, //ms
                 "strength": 0
             }
         }
@@ -74,7 +77,7 @@ var dummyDeviceData = {
     "clusters": {
         "c001":{
             "name": "living room",
-            "color": 94,
+            "color": 230,
             "devices": ["d001", "d002"],
             "status" : {
                 "scent": null, //indicates ON/OFF also

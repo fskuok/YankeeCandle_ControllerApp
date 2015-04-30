@@ -171,6 +171,72 @@ $control-panel-animation-duration: 0.4s;
         height:$timer-height;
         border-bottom: $control-panel-border;
         border-right: $control-panel-border;
+
+        #timer-slider{
+            width: calc(100% - #{2*$control-panel-padding});
+            margin: 100px $control-panel-padding 0;
+        }
+
+        $scent-strength-slider-width: 32px;
+        $scent-strength-slider-height: 18px;
+        $scent-strength-track-height: 8px;
+
+        #timer-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: $scent-strength-slider-width;
+            width: $scent-strength-slider-height;
+            border-radius: 3px;
+            background-color: #ffffff;
+            cursor: pointer;
+            margin-top: - ($scent-strength-slider-width - $scent-strength-track-height)/2; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+            box-shadow: $universal-shadow; /* Add cool effects to your sliders! */
+        }
+
+        #timer-slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: $scent-strength-track-height;
+            cursor: pointer;
+            //box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+            background: #bbb;
+            border-radius: 4px;
+            //border: 0.2px solid #010101;
+        }
+
+        p#current-timer{
+            position: absolute;
+            top: 30%;
+            left: $control-panel-padding;
+            font-size: 1.2em;
+            color: grey;
+            font-family: $font-bold;
+
+            @keyframes flash{
+                0%{
+                    opacity: 0;
+                }
+                50%{
+                    opacity: 1;
+                }
+                100%{
+                    opacity: 0;
+                }
+            }
+            @-webkit-keyframes flash{
+                0%{
+                    opacity: 0;
+                }
+                50%{
+                    opacity: 1;
+                }
+                100%{
+                    opacity: 0;
+                }
+            }
+            span{
+                animation: flash 0.5s infinite alternate;
+                -webkit-animation: flash 0.5s infinite alternate;
+            }
+        }
     }
 
     #scent-strength{
@@ -178,6 +244,15 @@ $control-panel-animation-duration: 0.4s;
         -webkit-flex: 1 1 33%;
         height: $timer-height;
         border-bottom: $control-panel-border;
+
+        p#current-scent-strength{
+            position: absolute;
+            top: 50%;
+            left: $control-panel-padding;
+            font-size: 1.2em;
+            color: grey;
+            font-family: $font-bold;
+        }
 
 
         #scent-strength-slider{
@@ -206,7 +281,7 @@ $control-panel-animation-duration: 0.4s;
             height: $scent-strength-track-height;
             cursor: pointer;
             //box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-            background: #6f7071;
+            background: #bbb;
             border-radius: 4px;
             //border: 0.2px solid #010101;
         }

@@ -1,11 +1,25 @@
 <div id="control-setting-view">
-    <h1>{{systemType}} Setting</h1>
-    <div class="device-name"><h2>NAME</h2><p>{{deviceData.name}}</p></div>
-    <div class="yc-setting-color">
+    <div class="device-name">
+        <h2>{{systemType | uppercase}} NAME</h2>
+        <p>{{thisData.name | titleCase}}</p>
+    </div>
+    <div class="setting-color">
         <h2>COLOR</h2>
-        <div class="sample" style="background-color: hsl({{deviceData.color}}, 85%, 65%)"></div>
+        <div class="sample" style="background-color: hsl({{thisData.color}}, 85%, 65%)"></div>
         <input class="color-picker" type="range" min="0" max="360" step="1"
                ng-model="deviceData.color" />
 
+    </div>
+
+    <div class="device-in-cluster" ng-show="systemType === 'cluster'">
+        <h2>DEVICE IN CLUSTER</h2>
+        <div ng-repeat="deviceId in thisData.devices">
+            <p>{{deviceData.devices[deviceId].name | titleCase}}</p>
+        </div>
+    </div>
+
+    <div class="cluster-of-device" ng-show="systemType === 'device'">
+        <h2>CLUSTER</h2>
+        <div>{{deviceData.util.findDeviceInCluster(deviceId).name | titleCase}}</div>
     </div>
 </div>

@@ -47,20 +47,21 @@
 
     <div id="timer">
         <h2>TIMER</h2>
+        <input type="range" min=0 max=7200000 id="timer-slider" step="60000"
+               ng-model="choseDeviceData.status.timer" list="timer-options"/>
+        <p id="current-timer">
+            {{choseDeviceData.status.timer == 0 ? formatTimer(choseDeviceData.status.timer) : formatTimer(choseDeviceData.status.timer)[0]}}
+            <span ng-hide="choseDeviceData.status.timer == 0">:</span>
+            {{choseDeviceData.status.timer == 0 ? '' : formatTimer(choseDeviceData.status.timer)[1] }}
+        </p>
+
     </div>
 
     <div id="scent-strength">
         <h2>SCENT<br/>STRENGTH</h2>
-        <input type="range" min=0 max=100 value=0 id="scent-strength-slider"
-               ng-model="choseDeviceData.scentStrength" list="strength-options"/>
-        <datalist id="strength-options">
-            <option>0</option>
-            <option>20</option>
-            <option>40</option>
-            <option>60</option>
-            <option>80</option>
-            <option>100</option>
-        </datalist>
+        <input type="range" min=0 max=10 id="scent-strength-slider"
+               ng-model="choseDeviceData.status.strength"/>
+        <p id="current-scent-strength">{{choseDeviceData.status.strength}}</p>
     </div>
 
     <div id="scents-title"> <h2>SCENTS<span>Tap on a scent to activate or deactivate it</span></h2></div>

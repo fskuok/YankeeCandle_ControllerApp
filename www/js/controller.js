@@ -89,6 +89,7 @@ app
 
                 $scope.deviceData = deviceDataService;
                 $scope.getHsl = deviceDataService.util.getHslColor;
+                $scope.formatTimer = deviceDataService.util.formatTimer;
 
                 // choosing status
                 $scope.choseSystem = 'devices';
@@ -150,9 +151,8 @@ app
             // $stateParams.id should be 'setting-d___' or 'setting-c___'
             $scope.deviceId = $stateParams.id.slice(8);
             $scope.systemType = $scope.deviceId.charAt(0) === 'c' ? 'cluster' : 'device';
-            $scope.deviceData = deviceDataService[$scope.systemType + 's'][$scope.deviceId];
-            console.log($scope.deviceData.name);
-
+            $scope.thisData = deviceDataService[$scope.systemType + 's'][$scope.deviceId];
+            $scope.deviceData = deviceDataService;
         }
     ])
 
