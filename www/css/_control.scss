@@ -14,9 +14,6 @@ $scent-height: 165px;
 
 $control-panel-animation-duration: 0.4s;
 
-.pane{
-    background: #e8e8e8;
-}
 
 #choose-system,
 #choose-device,
@@ -233,8 +230,8 @@ $control-panel-animation-duration: 0.4s;
                 }
             }
             span{
-                animation: flash 0.5s infinite alternate;
-                -webkit-animation: flash 0.5s infinite alternate;
+                //animation: flash 0.5s infinite alternate;
+                //-webkit-animation: flash 0.5s infinite alternate;
             }
         }
     }

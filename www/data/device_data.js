@@ -1,7 +1,7 @@
 var dummyDeviceData = {
     "devices":{
         "d001":{
-            "sparkId": "",
+            "sparkId": "54ff6e066678574930450767",
             "name": "bedroom table",
             "color": 30, //Hue value range from 0 to 360
             "scents":{
@@ -44,7 +44,7 @@ var dummyDeviceData = {
             },
             "status" : {
                 "scent": null, //indicates ON/OFF also
-                "timer": 0, //ms
+                "timer": 600000, //ms
                 "strength": 0
             }
         },

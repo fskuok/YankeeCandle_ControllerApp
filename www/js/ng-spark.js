@@ -19,15 +19,18 @@
                 if(!this.eventSource){
                     this.eventSource = new EventSource("https://api.spark.io/v1/devices/" + this.deviceID + "/events/?access_token=" + this.accessToken);
 
-                    console.log('event source created on:', this.deviceID, this.accessToken);
+                    // DEBUG
+                    // console.log('event source created on:', this.deviceID, this.accessToken);
 
                     this.subscribe('error', function(e){console.log(e)});
                 }
 
+
                 //if passed in event, register it
                 if(typeof name === 'string'){
 
-                    console.log('event registered:', name);
+                    // DEBUG
+                    // console.log('event registered:', name);
 
                     this.eventSource.addEventListener(name, handler, false);
                 }
@@ -48,11 +51,10 @@
                     "?access_token=" + this.accessToken;
 
                 $http.post( url ,  { "args": args })
-                    .success(onSuccess || null)
+                    .success(onSuccess || angular.noop)
                     // if specified a onError handler, use it
                     // otherwise, recall the readVariable method
                     .error(onError || function(data, status, headers, config) {
-                        this.callFn(name, args, onSuccess, onError);
                         // called asynchronously if an error occurs
                         // or server returns response with an error status.
                     });
@@ -65,11 +67,12 @@
                     "?access_token=" + this.accessToken;
 
                 $http.get(url)
-                    .success(onSuccess || null)
+
+                    .success(onSuccess || angular.noop)
                     // if specified a onError handler, use it
                     // otherwise, recall the readVariable method
                     .error(onError || function(data, status, headers, config) {
-                        this.readVariable(name, onSuccess, onError);
+                        // this.readVariable(name, onSuccess, onError);
                         // called asynchronously if an error occurs
                         // or server returns response with an error status.
                     });

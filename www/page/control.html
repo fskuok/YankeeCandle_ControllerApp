@@ -46,25 +46,42 @@
     </div>
 
     <div id="timer">
+
         <h2>TIMER</h2>
-        <input type="range" min=0 max=7200000 id="timer-slider" step="60000"
-               ng-model="choseDeviceData.status.timer" list="timer-options"/>
+
+        <input type="range" min=0 max={{2*60*60*1000}} id="timer-slider" step="1200000"
+               ng-model="choseDeviceData.status.timer" list="timer-options" ng-disabled="!choseDeviceData.status.scent"
+               ng-change="sendOrderToDevice(choseSystem === 'devices' ? choseDevice: choseCluster, 'timer', choseDeviceData.status.timer)"/>
+
         <p id="current-timer">
-            {{choseDeviceData.status.timer == 0 ? formatTimer(choseDeviceData.status.timer) : formatTimer(choseDeviceData.status.timer)[0]}}
-            <span ng-hide="choseDeviceData.status.timer == 0">:</span>
-            {{choseDeviceData.status.timer == 0 ? '' : formatTimer(choseDeviceData.status.timer)[1] }}
+            {{choseDeviceData.status.scent ? formatTimer(choseDeviceData.status.timer) : 'Please choose a scent first'}}
         </p>
 
     </div>
 
+
+
+    <!-- Set Strength-->
     <div id="scent-strength">
+
         <h2>SCENT<br/>STRENGTH</h2>
-        <input type="range" min=0 max=10 id="scent-strength-slider"
-               ng-model="choseDeviceData.status.strength"/>
+
+        <input type="range" min=0 max=6 id="scent-strength-slider"
+               ng-model="choseDeviceData.status.strength"
+                ng-change="sendOrderToDevice(choseSystem === 'devices' ? choseDevice: choseCluster, 'strength', choseDeviceData.status.strength)"/>
+
         <p id="current-scent-strength">{{choseDeviceData.status.strength}}</p>
+
     </div>
 
-    <div id="scents-title"> <h2>SCENTS<span>Tap on a scent to activate or deactivate it</span></h2></div>
+
+
+
+    <div id="scents-title">
+        <h2>SCENTS<span>Tap on a scent to activate or deactivate it</span></h2>
+    </div>
+
+
 
     <div class="scent {{scentData.name}}" ng-repeat="(scentId, scentData) in choseDeviceData.scents">
         <div class="thumb"></div>
@@ -74,7 +91,9 @@
         </div>
         <input type="radio" name="which-scent" ng-model="choseDeviceData.status.scent"
                id="radio-scent-{{scentId}}" value="{{scentId}}"
-               on-tap="scentOnTap(scentId)" ng-click="scentOnTap(scentId)"/>
+               on-tap="scentOnTap(scentId)" ng-click="scentOnTap(scentId)"
+               ng-change="sendOrderToDevice(choseSystem === 'devices' ? choseDevice: choseCluster,
+               'scent', choseDeviceData.scents[choseDeviceData.status.scent].name)"/>
         <label for="radio-scent-{{scentId}}"></label>
 
     </div>

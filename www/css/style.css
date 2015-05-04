@@ -27,9 +27,6 @@ input[type=range] {
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none; }
 
-input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none; }
-
 input[type=range]:focus {
   outline: none;
   /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */ }
@@ -54,6 +51,10 @@ h2 {
 
 html, body {
   font-size: 10px; }
+
+.pane {
+  background: #e8e8e8;
+  overflow: auto; }
 
 /* the button size is bigger than iOS guideline since the pngs are not cropped minimizly */
 header {
@@ -137,9 +138,6 @@ nav {
       background-image: url("../img/icons/setting.png"); }
   nav input[type=radio]:checked + label {
     background: rgba(0, 0, 0, 0.2); }
-
-.pane {
-  background: #e8e8e8; }
 
 #choose-system,
 #choose-device,
@@ -295,9 +293,6 @@ nav {
     opacity: 1; }
   #control-panel #timer p#current-timer 100%  {
     opacity: 0; } }
-      #control-panel #timer p#current-timer span {
-        animation: flash 0.5s infinite alternate;
-        -webkit-animation: flash 0.5s infinite alternate; }
   #control-panel #scent-strength {
     flex: 1 1 33%;
     -webkit-flex: 1 1 33%;
